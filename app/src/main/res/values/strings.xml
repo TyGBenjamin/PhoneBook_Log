@@ -14,4 +14,6 @@
     <string name="zipAdd">enter zipcode</string>
     <string name="clickFor">Click Name for More info.</string>
     <string name="editcontatcHEre">EditContact</string>
+    <string name="savedConfirmation">Contact information has been saved</string>
+    <string name="hideNotice">Hide Notification</string>
 </resources>

@@ -22,6 +22,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -48,6 +49,7 @@ import com.example.phonebook.model.data.local.Contact
 import com.example.phonebook.ui.theme.PhoneBookTheme
 import com.example.phonebook.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 /**
  * Add contact fragment.
@@ -109,6 +111,11 @@ class AddContactFragment : Fragment() {
                                 label = { Label("enter first Name") })
                             TextField(value = valueTwo, onValueChange = { valueTwo = it },
                                 label = { Label("enter last Name") })
+                            val (snackbarVisibleState, setSnackBarState) = remember {
+                                mutableStateOf(
+                                    false
+                                )
+                            }
                             val addedContact = Contact(
                                 firstName = value,
                                 lastName = valueTwo,
@@ -121,8 +128,28 @@ class AddContactFragment : Fragment() {
                                     zipCode ?: ""
                                 )
                             )
-                            MyButton(text = context.getString(R.string.saveALl),
-                                action = { dashboardViewModel.addContactNew(addedContact) })
+                            MyButton(
+                                text = context.getString(R.string.saveALl),
+                                action = {
+                                    setSnackBarState(!snackbarVisibleState)
+                                    dashboardViewModel.addContactNew(addedContact)
+                                })
+                            if (snackbarVisibleState) {
+                                Snackbar(
+                                    action = {
+                                        Button(onClick = {
+                                            setSnackBarState(!snackbarVisibleState)
+                                        }) {
+                                            Text(text = context.getString(R.string.hideNotice))
+                                        }
+                                    },
+                                    modifier = Modifier.padding(8.dp)
+                                ) {
+                                    Column() {
+                                        Text(text = context.getString(R.string.savedConfirmation))
+                                    }
+                                }
+                            }
                             DividerOne()
                             Row(verticalAlignment = Alignment.CenterVertically) {
                             }
@@ -135,7 +162,8 @@ class AddContactFragment : Fragment() {
                                 IconLabels(resource = R.drawable.ic_baseline_email_24,
                                     navigate = { findNavController().navigate(R.id.addEmailFragment) })
                                 IconLabels(resource = R.drawable.ic_baseline_house_24,
-                                    navigate = { findNavController().navigate(R.id.addAddressFragment)
+                                    navigate = {
+                                        findNavController().navigate(R.id.addAddressFragment)
                                     }
                                 )
                             }

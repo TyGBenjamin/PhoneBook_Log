@@ -114,7 +114,6 @@ fun ContactRow(contact: Contact) {
         val (snackbarVisibleState, setSnackBarState) = remember { mutableStateOf(false) }
         Row(modifier = Modifier.clickable {
             setSnackBarState(!snackbarVisibleState)
-
         }) {
             ImageThumbnail()
             Text(
