@@ -39,7 +39,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -47,15 +46,18 @@ import com.example.phonebook.R
 import com.example.phonebook.model.data.local.Address
 import com.example.phonebook.model.data.local.Contact
 import com.example.phonebook.ui.theme.PhoneBookTheme
-import com.example.phonebook.viewmodel.AddContactViewModel
 import com.example.phonebook.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Add contact fragment.
+ *
+ * @constructor Create empty Add contact fragment
+ */
 @AndroidEntryPoint
 class AddContactFragment : Fragment() {
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
-    private val contactViewModel by activityViewModels<AddContactViewModel>()
-    val cellNum = arguments?.getString("cell")
+    val cellNum by lazy { arguments?.getString("cell") }
     val workNum by lazy { arguments?.getString("work") }
     val homeNum by lazy { arguments?.getString("home") }
     val workEmail by lazy { arguments?.getString("workEmail") }
@@ -64,8 +66,6 @@ class AddContactFragment : Fragment() {
     val city by lazy { arguments?.getString("city") }
     val state by lazy { arguments?.getString("state") }
     val zipCode by lazy { arguments?.getString("zipcode") }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +97,6 @@ class AddContactFragment : Fragment() {
                             ),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-
                             var value by remember {
                                 mutableStateOf("")
                             }
@@ -105,7 +104,6 @@ class AddContactFragment : Fragment() {
                             var valueTwo by remember {
                                 mutableStateOf("")
                             }
-
                             IconOne()
                             TextField(value = value, onValueChange = { value = it },
                                 label = { Label("enter first Name") })
@@ -123,32 +121,25 @@ class AddContactFragment : Fragment() {
                                     zipCode ?: ""
                                 )
                             )
-                          MyButton(text = context.getString(R.string.saveALl),
-                              action = { dashboardViewModel.addContactNew(addedContact) })
-
-                            println("NEWLY ADDED CONTACT IS $addedContact")
+                            MyButton(text = context.getString(R.string.saveALl),
+                                action = { dashboardViewModel.addContactNew(addedContact) })
                             DividerOne()
                             Row(verticalAlignment = Alignment.CenterVertically) {
                             }
                         }
                         Column {
-                            Text(
-                                text = context.getString(R.string.clickIcon),
-                                fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(start = 70.dp, bottom = 10.dp)
-                            )
+                            QuickText(text = context.getString(R.string.clickIcon))
                             Row(modifier = Modifier.padding(start = 115.dp)) {
                                 IconLabels(resource = R.drawable.ic_baseline_perm_phone_msg_24,
                                     navigate = { findNavController().navigate(R.id.addPhoneFragment) })
                                 IconLabels(resource = R.drawable.ic_baseline_email_24,
                                     navigate = { findNavController().navigate(R.id.addEmailFragment) })
                                 IconLabels(resource = R.drawable.ic_baseline_house_24,
-                                    navigate = { findNavController().navigate(R.id.addAddressFragment) })
+                                    navigate = { findNavController().navigate(R.id.addAddressFragment)
+                                    }
+                                )
                             }
                             DividerOne()
-
                             Row() {
                                 MyButton(
                                     text = stringResource(R.string.homeList),
@@ -163,45 +154,13 @@ class AddContactFragment : Fragment() {
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AddContact(
-) {
-    Column(
-        Modifier
-            .padding(24.dp)
-            .wrapContentSize()
-            .background(Color.Black),
-        verticalArrangement = Arrangement.spacedBy(13.dp, alignment = Alignment.Bottom),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        var value by remember {
-            mutableStateOf("")
-        }
-
-        var valueTwo by remember {
-            mutableStateOf("")
-        }
-
-        IconOne()
-        TextField(value = value, onValueChange = { value = it },
-            label = { Label("enter first Name") })
-        TextField(value = valueTwo, onValueChange = { valueTwo = it },
-            label = { Label("enter last Name") })
-        DividerOne()
-        Row(verticalAlignment = Alignment.CenterVertically) {
-        }
-    }
-}
-
 @Composable
 fun MyButton(text: String, action: () -> Unit) {
     Button(
         onClick = {
             action()
-        }, modifier = Modifier
+        },
+        modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color.White)
@@ -211,18 +170,6 @@ fun MyButton(text: String, action: () -> Unit) {
             fontSize = 20.sp,
             color = Color.Black
         )
-    }
-}
-
-@Composable
-fun AddContactHere() {
-    Box(
-        modifier = Modifier.padding(5.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column {
-            Text(text = "")
-        }
     }
 }
 
@@ -262,10 +209,13 @@ fun Label(typeInput: String = "Show Result") {
 }
 
 @Composable
-fun Label2() {
+fun QuickText(text: String) {
     Text(
-        text = "input number",
-        fontSize = 8.sp
+        text = text,
+        fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
+        color = Color.White,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(start = 70.dp, bottom = 10.dp)
     )
 }
 
@@ -285,5 +235,4 @@ fun IconLabels(resource: Int, navigate: () -> Unit) {
         )
     }
 }
-
 

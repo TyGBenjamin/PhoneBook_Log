@@ -38,9 +38,13 @@ import com.example.phonebook.R
 import com.example.phonebook.ui.theme.PhoneBookTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Add phone fragment.
+ *
+ * @constructor Create empty Add phone fragment
+ */
 @AndroidEntryPoint
 class AddPhoneFragment : Fragment() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,15 +65,12 @@ class AddPhoneFragment : Fragment() {
                             .background(Color.Black)
                     ) {
                         AddPhone(fragment = this@AddPhoneFragment)
-
                     }
                 }
             }
         }
     }
 }
-
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,7 +84,6 @@ fun AddPhone(fragment: AddPhoneFragment
         verticalArrangement = Arrangement.spacedBy(13.dp, alignment = Alignment.Bottom),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         var workNumb by remember {
             mutableStateOf("")
         }
@@ -95,7 +95,6 @@ fun AddPhone(fragment: AddPhoneFragment
         var homeNumb by remember {
             mutableStateOf("")
         }
-
         IconOne()
         TextField(value = cellNumb, onValueChange = { cellNumb = it },
             label = { Label("enter cell #") })
@@ -115,7 +114,6 @@ fun AddPhone(fragment: AddPhoneFragment
                     "home" to homeNumb
                 )
                 findNavController(fragment = fragment).navigate(R.id.addContactFragment, args)
-
             }, modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),

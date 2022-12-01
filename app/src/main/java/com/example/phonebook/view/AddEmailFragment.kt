@@ -37,21 +37,22 @@ import com.example.phonebook.R
 import com.example.phonebook.ui.theme.PhoneBookTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Add email fragment.
+ *
+ * @constructor Create empty Add email fragment
+ */
 @AndroidEntryPoint
 class AddEmailFragment : Fragment() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        // requireActivity()
         return ComposeView(requireActivity()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
@@ -62,14 +63,12 @@ class AddEmailFragment : Fragment() {
                             .background(Color.Black)
                     ) {
                         AddEmail(fragment = this@AddEmailFragment)
-
                     }
                 }
             }
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -23,7 +19,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
@@ -39,24 +33,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.phonebook.R
 import com.example.phonebook.model.data.local.Contact
 import com.example.phonebook.ui.theme.PhoneBookTheme
-import com.example.phonebook.viewmodel.AddContactViewModel
 import com.example.phonebook.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
+/**
+ * Dashboard fragment.
+ *
+ * @constructor Create empty Dashboard fragment
+ */
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private val dashViewModel by activityViewModels<DashboardViewModel>()
-    private val contactViewModel by activityViewModels<AddContactViewModel>()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +62,6 @@ class DashboardFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 PhoneBookTheme {
-                    val currentContact = contactViewModel.contactListO.collectAsState().value
                     dashViewModel.getContacts()
                     val contacts = dashViewModel.contactList.collectAsState().value
                     Column(
@@ -83,7 +73,7 @@ class DashboardFragment : Fragment() {
                         println("CONTACTS ARE $contacts")
 //                        println("CURRENT FOR TESTING $currentContact")
                         Text(text = "Hello", color = Color.White)
-                        HomeScreen(navigate = { { /*TODO*/ } }, contacts = contacts)
+                        HomeScreen(contacts = contacts)
                         Button(onClick = { findNavController().navigate(R.id.addContactFragment) }) {
                             Text(
                                 text = context.getString(R.string.addContactButton),
@@ -99,7 +89,6 @@ class DashboardFragment : Fragment() {
 
 @Composable
 fun HomeScreen(
-    navigate: () -> Unit,
     contacts: List<Contact>
 ) {
     LazyColumn(state = rememberLazyListState(), modifier = Modifier.padding(5.dp)) {
@@ -109,11 +98,6 @@ fun HomeScreen(
             )
         }
     }
-}
-
-@Composable
-fun CircleShapeDemo() {
-    ExampleBox(shape = CircleShape)
 }
 
 @Composable
@@ -129,12 +113,10 @@ fun ImageThumbnail() {
 fun ContactRow(contact: Contact) {
     Column() {
         val (snackbarVisibleState, setSnackBarState) = remember { mutableStateOf(false) }
-
         Row(modifier = Modifier.clickable {
             setSnackBarState(!snackbarVisibleState)
 
         }) {
-
             ImageThumbnail()
             Text(
                 text = "${contact.firstName} ${contact.lastName}",
@@ -145,7 +127,6 @@ fun ContactRow(contact: Contact) {
         }
         if (snackbarVisibleState) {
             Snackbar(
-
                 action = {
                     Button(onClick = {}) {
                         Text("MyAction")
@@ -154,7 +135,6 @@ fun ContactRow(contact: Contact) {
                 modifier = Modifier.padding(8.dp)
             ) {
                 Column() {
-
                     Text(text = "Email: ${contact.email.first()}")
                     Text(text = "Cell Number: ${contact.phone.first()}")
                     Text(text = "Alt Number: ${contact.phone.get(1)}")
@@ -167,21 +147,3 @@ fun ContactRow(contact: Contact) {
         }
     }
 }
-
-@Composable
-fun ExampleBox(shape: Shape) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Box(
-            modifier = Modifier
-                .size(100.dp)
-                .clip(shape)
-        )
-    }
-}
-
-
-

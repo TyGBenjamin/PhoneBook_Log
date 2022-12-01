@@ -71,6 +71,7 @@ dependencies {
     implementation(Libs.daggerBase)
     implementation(Libs.roomBase)
     implementation(Libs.roomKtx)
+    androidTestImplementation("junit:junit:4.12")
     kapt(Libs.daggerKapt)
     kapt(Libs.roomKapt)
     implementation(Libs.jakeWharton)

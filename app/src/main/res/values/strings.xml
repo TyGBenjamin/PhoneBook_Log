@@ -8,4 +8,8 @@
     <string name="homeList">Home</string>
     <string name="saveALl">Save All Contact Info</string>
     <string name="clickIcon">Click Icon Below To Add More Details</string>
+    <string name="city1">enter street Address</string>
+    <string name="cityAdd">enter city #</string>
+    <string name="stateAdd">enter State</string>
+    <string name="zipAdd">enter zipcode</string>
 </resources>

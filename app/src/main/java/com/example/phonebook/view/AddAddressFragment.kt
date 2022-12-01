@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
@@ -37,9 +38,13 @@ import com.example.phonebook.R
 import com.example.phonebook.ui.theme.PhoneBookTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Add address fragment for storing data into Contact.
+ *
+ * @constructor Create empty Add address fragment
+ */
 @AndroidEntryPoint
-class AddAddressFragment: Fragment() {
-
+class AddAddressFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,14 +65,12 @@ class AddAddressFragment: Fragment() {
                             .background(Color.Black)
                     ) {
                         AddAddress(fragment = this@AddAddressFragment)
-
                     }
                 }
             }
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,7 +85,6 @@ fun AddAddress(
         verticalArrangement = Arrangement.spacedBy(13.dp, alignment = Alignment.Bottom),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         var streetAddress by remember {
             mutableStateOf("")
         }
@@ -99,16 +101,27 @@ fun AddAddress(
             mutableStateOf("")
         }
 
-
         IconOne()
-        TextField(value = streetAddress, onValueChange = { streetAddress = it },
-            label = { Label("enter street Address") })
-        TextField(value = city, onValueChange = { city = it },
-            label = { Label("enter city #") })
-        TextField(value = state, onValueChange = { state = it },
-            label = { Label("enter State") })
-        TextField(value = zipCode, onValueChange = { zipCode = it },
-            label = { Label("enter zipcode") })
+        TextField(value = streetAddress,
+            onValueChange = { streetAddress = it },
+            label = { Label(
+                stringResource(R.string.city1)
+            )
+            })
+        TextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Label(stringResource(R.string.cityAdd))
+            })
+        TextField(
+            value = state,
+            onValueChange = { state = it },
+            label = { Label(stringResource(R.string.stateAdd)) })
+        TextField(value = zipCode,
+            onValueChange = { zipCode = it },
+            label = { Label(stringResource(R.string.zipAdd))
+            }
+        )
         DividerOne()
         Row(verticalAlignment = Alignment.CenterVertically) {
         }
@@ -119,12 +132,12 @@ fun AddAddress(
                     "street" to streetAddress,
                     "city" to city,
                     "state" to state,
-                    "zipcode" to zipCode.toString(),
+                    "zipcode" to zipCode
                 )
                 NavHostFragment.findNavController(fragment = fragment)
                     .navigate(R.id.addContactFragment, args)
-
-            }, modifier = Modifier
+            },
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White)
