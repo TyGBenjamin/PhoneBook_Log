@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +20,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +36,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -122,11 +127,44 @@ fun ImageThumbnail() {
 
 @Composable
 fun ContactRow(contact: Contact) {
-    Row {
-        ImageThumbnail()
-        Text(text = "${contact.firstName} ${contact.lastName}",
-        color = Color.White)
+    Column() {
+        val (snackbarVisibleState, setSnackBarState) = remember { mutableStateOf(false) }
 
+        Row(modifier = Modifier.clickable {
+            setSnackBarState(!snackbarVisibleState)
+
+        }) {
+
+            ImageThumbnail()
+            Text(
+                text = "${contact.firstName} ${contact.lastName}",
+                color = Color.White,
+                fontSize = 25.sp
+            )
+            Text(text = "Click Name for More info.")
+        }
+        if (snackbarVisibleState) {
+            Snackbar(
+
+                action = {
+                    Button(onClick = {}) {
+                        Text("MyAction")
+                    }
+                },
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Column() {
+
+                    Text(text = "Email: ${contact.email.first()}")
+                    Text(text = "Cell Number: ${contact.phone.first()}")
+                    Text(text = "Alt Number: ${contact.phone.get(1)}")
+                    Text(text = "Address: ${contact.address.streetAddress}")
+                    Text(text = "city: ${contact.address.city}")
+                    Text(text = "state: ${contact.address.state}")
+                    Text(text = "zip: ${contact.address.zipcode}")
+                }
+            }
+        }
     }
 }
 
