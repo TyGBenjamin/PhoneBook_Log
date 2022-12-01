@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PhoneBook</string>
+    <string name="heythere">heythere</string>
+    <string name="addContactButton">Add Contact</string>
+    <string name="saveContact">Save Contact</string>
+    <string name="savePhone">Save Phone Numbers</string>
+    <string name="saveNumbers">Save Number(s)</string>
+    <string name="homeList">Home</string>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.phonebook.view.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_addContactFragment"
+            app:destination="@id/addContactFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_editContactFragment"
+            app:destination="@id/editContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="com.example.phonebook.view.AddContactFragment"
+        android:label="AddContactFragment" >
+        <action
+            android:id="@+id/action_addContactFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+        <action
+            android:id="@+id/action_addContactFragment_to_addEmailFragment"
+            app:destination="@id/addEmailFragment" />
+        <action
+            android:id="@+id/action_addContactFragment_to_addPhoneFragment"
+            app:destination="@id/addPhoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editContactFragment"
+        android:name="com.example.phonebook.view.EditContactFragment"
+        android:label="EditContactFragment" />
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.example.phonebook.view.AddAddressFragment"
+        android:label="AddAddressFragment" />
+    <fragment
+        android:id="@+id/addEmailFragment"
+        android:name="com.example.phonebook.view.AddEmailFragment"
+        android:label="AddEmailFragment" />
+    <fragment
+        android:id="@+id/addPhoneFragment"
+        android:name="com.example.phonebook.view.AddPhoneFragment"
+        android:label="AddPhoneFragment" />
+</navigation>
