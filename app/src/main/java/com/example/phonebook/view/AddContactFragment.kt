@@ -55,7 +55,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddContactFragment : Fragment() {
     private val dashboardViewModel by activityViewModels<DashboardViewModel>()
     private val contactViewModel by activityViewModels<AddContactViewModel>()
-    val cellNum by lazy { arguments?.getString("cell") }
+    val cellNum = arguments?.getString("cell")
     val workNum by lazy { arguments?.getString("work") }
     val homeNum by lazy { arguments?.getString("home") }
     val workEmail by lazy { arguments?.getString("workEmail") }
@@ -64,6 +64,7 @@ class AddContactFragment : Fragment() {
     val city by lazy { arguments?.getString("city") }
     val state by lazy { arguments?.getString("state") }
     val zipCode by lazy { arguments?.getString("zipcode") }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
