@@ -106,11 +106,26 @@ class AddContactFragment : Fragment() {
                             var valueTwo by remember {
                                 mutableStateOf("")
                             }
+                            var cellNumb1 by remember {
+                                mutableStateOf("")
+                            }
+                            var workNumb1 by remember {
+                                mutableStateOf("")
+                            }
+                            var homeNumb1 by remember {
+                                mutableStateOf("")
+                            }
                             IconOne()
                             TextField(value = value, onValueChange = { value = it },
                                 label = { Label("enter first Name") })
                             TextField(value = valueTwo, onValueChange = { valueTwo = it },
                                 label = { Label("enter last Name") })
+                            TextField(value = cellNumb1, onValueChange = { cellNumb1 = it },
+                                label = { Label("enter cell #") })
+                            TextField(value = workNumb1, onValueChange = { workNumb1 = it },
+                                label = { Label("enter work #") })
+                            TextField(value = homeNumb1, onValueChange = { homeNumb1 = it },
+                                label = { Label("enter home #") })
                             val (snackbarVisibleState, setSnackBarState) = remember {
                                 mutableStateOf(
                                     false
@@ -119,7 +134,7 @@ class AddContactFragment : Fragment() {
                             val addedContact = Contact(
                                 firstName = value,
                                 lastName = valueTwo,
-                                phone = listOf(cellNum ?: "", workNum ?: "", homeNum ?: ""),
+                                phone = listOf(cellNumb1 ?: "", workNumb1 ?: "", homeNumb1 ?: ""),
                                 email = listOf(workEmail ?: "", altEmail ?: ""),
                                 address = Address(
                                     streetAddress ?: "",
@@ -156,9 +171,9 @@ class AddContactFragment : Fragment() {
                         }
                         Column {
                             QuickText(text = context.getString(R.string.clickIcon))
-                            Row(modifier = Modifier.padding(start = 115.dp)) {
-                                IconLabels(resource = R.drawable.ic_baseline_perm_phone_msg_24,
-                                    navigate = { findNavController().navigate(R.id.addPhoneFragment) })
+                            Row(modifier = Modifier.padding(start = 145.dp)) {
+//                                IconLabels(resource = R.drawable.ic_baseline_perm_phone_msg_24,
+//                                    navigate = { findNavController().navigate(R.id.addPhoneFragment) })
                                 IconLabels(resource = R.drawable.ic_baseline_email_24,
                                     navigate = { findNavController().navigate(R.id.addEmailFragment) })
                                 IconLabels(resource = R.drawable.ic_baseline_house_24,
@@ -168,12 +183,10 @@ class AddContactFragment : Fragment() {
                                 )
                             }
                             DividerOne()
-                            Row() {
                                 MyButton(
                                     text = stringResource(R.string.homeList),
                                     action = { findNavController().navigate(R.id.dashboardFragment) }
                                 )
-                            }
                         }
                     }
                 }
@@ -222,7 +235,7 @@ fun IconOne() {
         Icon(
             painter = painterResource(id = R.drawable.person_add),
             null,
-            Modifier.size(200.dp),
+            Modifier.size(110.dp),
             tint = Color.White
         )
     }
