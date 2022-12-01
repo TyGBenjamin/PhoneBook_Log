@@ -66,9 +66,8 @@ class DashboardFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 PhoneBookTheme {
-//                    val currentContact = contactViewModel.contactListO.collectAsState().value
-//                    dashViewModel.addContactNew(currentContact)
-//                    val job = dashViewModel.getContacts()
+                    val currentContact = contactViewModel.contactListO.collectAsState().value
+                    dashViewModel.getContacts()
                     val contacts = dashViewModel.contactList.collectAsState().value
                     Column(
 
@@ -125,7 +124,8 @@ fun ImageThumbnail() {
 fun ContactRow(contact: Contact) {
     Row {
         ImageThumbnail()
-        Text(text = "${contact.firstName} ${contact.lastName}")
+        Text(text = "${contact.firstName} ${contact.lastName}",
+        color = Color.White)
 
     }
 }

@@ -48,10 +48,12 @@ import com.example.phonebook.model.data.local.Address
 import com.example.phonebook.model.data.local.Contact
 import com.example.phonebook.ui.theme.PhoneBookTheme
 import com.example.phonebook.viewmodel.AddContactViewModel
+import com.example.phonebook.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddContactFragment : Fragment() {
+    private val dashboardViewModel by activityViewModels<DashboardViewModel>()
     private val contactViewModel by activityViewModels<AddContactViewModel>()
     val cellNum by lazy { arguments?.getString("cell") }
     val workNum by lazy { arguments?.getString("work") }
@@ -120,7 +122,7 @@ class AddContactFragment : Fragment() {
                                     zipCode ?: ""
                                 )
                             )
-                          MyButton(text = "Save Contact Info", action = { contactViewModel.addContactNew(addedContact) })
+                          MyButton(text = "Save Contact Info", action = { dashboardViewModel.addContactNew(addedContact) })
 
                             println("NEWLY ADDED CONTACT IS $addedContact")
                             DividerOne()

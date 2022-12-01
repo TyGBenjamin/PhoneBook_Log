@@ -1,5 +1,7 @@
 package com.example.phonebook.model.data.local
 
+import androidx.room.Entity
+
 data class Address(
     val streetAddress: String,
     val city: String,

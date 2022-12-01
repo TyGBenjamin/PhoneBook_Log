@@ -25,7 +25,7 @@ class DashboardViewModel @Inject constructor(private val repository: RepositoryI
     ) {
         viewModelScope.launch {
             repository.insertContact(contact)
-            println(contact)
+            println("$contact ADDED TO DB")
         }
     }
 

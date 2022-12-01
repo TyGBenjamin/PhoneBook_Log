@@ -24,9 +24,4 @@ object AppModule {
     @Provides
     fun providesRepo(phoneBookDao: PhoneBookDao) : Repository = RepositoryImpl(phoneBookDao)
 
-
-
-//    @Provides
-//    @Singleton
-//    fun provideDataStore(@ApplicationContext context: Context): DataStoreSource = DataStoreImpl(context)
 }

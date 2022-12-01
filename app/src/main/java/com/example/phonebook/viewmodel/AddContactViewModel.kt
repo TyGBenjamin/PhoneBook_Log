@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class AddContactViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     private val _contactListO: MutableStateFlow<Contact> = MutableStateFlow(
         Contact(
-            999, "", "",
+            999, "ty", "gandy",
             emptyList(), emptyList(), Address("", "", "", "")
         )
     )
