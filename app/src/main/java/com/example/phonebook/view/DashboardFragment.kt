@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -70,8 +71,6 @@ class DashboardFragment : Fragment() {
                             .fillMaxSize()
                             .background(Color.Black)
                     ) {
-                        println("CONTACTS ARE $contacts")
-//                        println("CURRENT FOR TESTING $currentContact")
                         Text(text = "Hello", color = Color.White)
                         HomeScreen(contacts = contacts)
                         Button(onClick = { findNavController().navigate(R.id.addContactFragment) }) {
@@ -123,13 +122,13 @@ fun ContactRow(contact: Contact) {
                 color = Color.White,
                 fontSize = 25.sp
             )
-            Text(text = "Click Name for More info.")
+            Text(text = stringResource(R.string.clickFor))
         }
         if (snackbarVisibleState) {
             Snackbar(
                 action = {
                     Button(onClick = {}) {
-                        Text("MyAction")
+                        Text(stringResource(R.string.editcontatcHEre))
                     }
                 },
                 modifier = Modifier.padding(8.dp)

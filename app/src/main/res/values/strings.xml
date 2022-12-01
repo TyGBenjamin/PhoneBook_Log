@@ -12,4 +12,6 @@
     <string name="cityAdd">enter city #</string>
     <string name="stateAdd">enter State</string>
     <string name="zipAdd">enter zipcode</string>
+    <string name="clickFor">Click Name for More info.</string>
+    <string name="editcontatcHEre">EditContact</string>
 </resources>
