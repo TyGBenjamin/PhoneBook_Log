@@ -127,11 +127,12 @@ fun AddAddress(
             }, modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White)
         ) {
             Text(
                 text = "save Address",
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = Color.Black
             )
         }
     }

@@ -122,7 +122,8 @@ class AddContactFragment : Fragment() {
                                     zipCode ?: ""
                                 )
                             )
-                          MyButton(text = "Save Contact Info", action = { dashboardViewModel.addContactNew(addedContact) })
+                          MyButton(text = context.getString(R.string.saveALl),
+                              action = { dashboardViewModel.addContactNew(addedContact) })
 
                             println("NEWLY ADDED CONTACT IS $addedContact")
                             DividerOne()
@@ -131,7 +132,7 @@ class AddContactFragment : Fragment() {
                         }
                         Column {
                             Text(
-                                text = "Click Icon Below To Add More Details",
+                                text = context.getString(R.string.clickIcon),
                                 fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
                                 color = Color.White,
                                 textAlign = TextAlign.Center,
@@ -202,11 +203,12 @@ fun MyButton(text: String, action: () -> Unit) {
         }, modifier = Modifier
             .fillMaxWidth()
             .height(50.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+        colors = ButtonDefaults.buttonColors(containerColor = Color.White)
     ) {
         Text(
             text = text,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            color = Color.Black
         )
     }
 }

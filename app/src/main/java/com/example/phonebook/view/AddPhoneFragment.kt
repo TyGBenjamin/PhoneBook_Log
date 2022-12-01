@@ -119,11 +119,12 @@ fun AddPhone(fragment: AddPhoneFragment
             }, modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White)
         ) {
             Text(
                 text = stringResource(R.string.saveNumbers),
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = Color.Black
             )
         }
     }

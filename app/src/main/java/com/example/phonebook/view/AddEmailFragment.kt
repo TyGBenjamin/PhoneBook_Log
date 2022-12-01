@@ -114,11 +114,13 @@ fun AddEmail(
             }, modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White,
+            disabledContainerColor = Color.Gray)
         ) {
             Text(
                 text = "save Email(s)",
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                color = Color.Black
             )
         }
     }

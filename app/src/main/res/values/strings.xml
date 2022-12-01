@@ -6,4 +6,6 @@
     <string name="savePhone">Save Phone Numbers</string>
     <string name="saveNumbers">Save Number(s)</string>
     <string name="homeList">Home</string>
+    <string name="saveALl">Save All Contact Info</string>
+    <string name="clickIcon">Click Icon Below To Add More Details</string>
 </resources>
